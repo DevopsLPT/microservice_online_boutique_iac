@@ -1,0 +1,6 @@
+- name: Install load-balancing Server
+  hosts: load-balancing
+  become: yes
+  roles:
+    - teleport
+    - nginx

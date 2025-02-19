@@ -1,0 +1,7 @@
+- name: Install Frontend Server
+  hosts: deploy-server
+  become: yes
+  roles:
+    - teleport
+    - docker
+    - portainer-agent

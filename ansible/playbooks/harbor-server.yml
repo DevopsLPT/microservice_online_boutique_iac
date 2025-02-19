@@ -1,0 +1,8 @@
+- name: Install Artifact Server
+  hosts: harbor-server
+  become: yes
+  roles:
+    - teleport
+    - docker
+    - portainer-agent
+    - harbor

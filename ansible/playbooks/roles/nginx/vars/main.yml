@@ -1,0 +1,16 @@
+sonarqube_domain: "sonarqube.lptdevops.website"
+sonarqube_host: "http://10.0.1.3:9000"
+
+portainer_domain: "portainer.lptdevops.website"
+portainer_host: "http://10.0.1.4:9000"
+
+harbor_domain: "harbor.lptdevops.website"
+harbor_host: "https://10.0.1.5:443"
+
+jenkins_domain: "jenkins.lptdevops.website"
+jenkins_host: "http://10.0.1.6:8080"
+
+onlineshop_domain: "onlineshop.lptdevops.website"
+onlineshop_host: "http://10.0.1.7:80"
+
+email: "thuanlephuc152@gmail.com"

@@ -1,0 +1,16 @@
+[Unit]
+Description=Jenkins Agent
+After=network.target
+
+[Service]
+User=jenkins
+WorkingDirectory=/var/lib/jenkins
+ExecStart=java -jar /var/lib/jenkins/agent.jar -url https://jenkins.lptdevops.website/ -secret 4b00fed8fdd8f6b42e1696a6edfd046628ac8a9a30231747c52eab585f6c4a06 -name "build-server" -webSocket -workDir "/var/lib/jenkins"
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
+~                                                                                                                                                                                                               
+~                                                                                                                                                                                                               
+~                                     
