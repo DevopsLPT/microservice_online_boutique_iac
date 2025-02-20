@@ -6,7 +6,7 @@ This project automates the deployment of virtual machines (VMs) for essential De
 
 - **SonarQube**: Code quality and security analysis
 - **Jenkins**: Continuous Integration and Continuous Deployment (CI/CD)
-- **Portainer**: Container management UI for Docker and Kubernetes
+- **Portainer**: Container management UI for Docker 
 - **Harbor**: Container registry with security and vulnerability scanning
 - **Teleport**: Central management for VMs and cloud infrastructure
 - **Nginx**: Reverse proxy for all services
@@ -19,7 +19,7 @@ This solution provides a scalable, repeatable, and automated way to set up the D
 
 To use this setup, ensure the following tools are installed and configured:
 
-- **Terraform**: Used for provisioning cloud resources.
+- **Terraform**: Used for provisioning cloud GCP.
 - **Ansible**: Used for configuring services and VMs.
 
 **Terraform** automates the provisioning of the following infrastructure components:
@@ -57,6 +57,9 @@ Once the infrastructure is provisioned by Terraform, **Ansible** is used to conf
 - CI Pipeline with multibranch
 ![ci](images/ci.jpg)
 ![ci](images/ci-in.jpg)
+Send report to telegram: 
+![report](images/report.jpg)
+
 - CD with choice-box
 ![cd](images/deploy-pipeline.jpg)
 ![cd](images/deploy.jpg)

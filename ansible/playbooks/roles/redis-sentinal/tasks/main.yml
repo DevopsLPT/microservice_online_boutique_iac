@@ -1,0 +1,66 @@
+- name: Install prerequisites
+  apt:
+    name:
+      - lsb-release
+      - curl
+      - gpg
+    state: present
+    update_cache: yes
+
+- name: Add Redis GPG key
+  ansible.builtin.command: |
+    curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+  args:
+    warn: false
+  register: gpg_output
+  changed_when: "'gpg: key' in gpg_output.stderr"
+
+- name: Add Redis repository
+  ansible.builtin.command: >
+    echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+  args:
+    warn: false
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install Redis and Redis Sentinel
+  apt:
+    name:
+      - redis
+      - redis-sentinel
+    state: present
+
+- name: Configure Redis Master
+  when: redis_role == "master"
+  template:
+    src: templates/master-redis.conf.j2
+    dest: /etc/redis/redis.conf
+  notify: Restart Redis
+
+- name: Configure Redis Slave
+  when: redis_role == "slave"
+  template:
+    src: templates/slave-redis.conf.j2
+    dest: /etc/redis/redis.conf
+  notify: Restart Redis
+
+- name: Enable and start Redis-server
+  systemd:
+    name: redis-server
+    enabled: yes
+    state: started
+
+
+- name: Configure Sentinel
+  template:
+    src: templates/sentinel.conf.j2
+    dest: /etc/redis/sentinel.conf
+  notify: Restart Sentinel
+
+- name: Enable and start Redis-sentinel
+  systemd:
+    name: redis-sentinel
+    enabled: yes
+    state: started

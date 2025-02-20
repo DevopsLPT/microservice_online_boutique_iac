@@ -1,0 +1,8 @@
+- name: Restart Sentinel
+  shell: |
+    systemctl restart redis-sentinel
+    
+- name: Restart Redis
+  service:
+    name: redis-server
+    state: restarted
